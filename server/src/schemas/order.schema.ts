@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-// ─── Shared primitives ────────────────────────────────────────────────────────
+// ─── Shared primitives 
 
 /** Validates a 24-hex-character MongoDB ObjectId. */
 const mongoId = z
@@ -21,7 +21,7 @@ const normalisePaymentMethod = (raw: string): string => {
     return map[raw?.toLowerCase()] ?? raw;
 };
 
-// ─── createOrder ─────────────────────────────────────────────────────────────
+// ─── createOrder 
 
 export const orderItemSchema = z.object({
     menuItemId: mongoId,
@@ -79,7 +79,7 @@ export const createOrderSchema = z.object({
 
 export type CreateOrderBody = z.infer<typeof createOrderSchema>;
 
-// ─── updateOrderStatus ────────────────────────────────────────────────────────
+// ─── updateOrderStatus 
 
 export const updateOrderStatusSchema = z.object({
     orderStatus: z.enum([
@@ -99,7 +99,7 @@ export const updateOrderStatusSchema = z.object({
 
 export type UpdateOrderStatusBody = z.infer<typeof updateOrderStatusSchema>;
 
-// ─── verifyBankTransfer ───────────────────────────────────────────────────────
+// ─── verifyBankTransfer 
 
 export const verifyBankTransferSchema = z.object({
     isApproved: z.boolean(),
@@ -108,7 +108,7 @@ export const verifyBankTransferSchema = z.object({
 
 export type VerifyBankTransferBody = z.infer<typeof verifyBankTransferSchema>;
 
-// ─── getOrders (query) ────────────────────────────────────────────────────────
+// ─── getOrders (query) 
 
 export const getOrdersQuerySchema = z.object({
     page: z.coerce.number().int().positive().default(1),
@@ -118,7 +118,7 @@ export const getOrdersQuerySchema = z.object({
 
 export type GetOrdersQuery = z.infer<typeof getOrdersQuerySchema>;
 
-// ─── :id route param ─────────────────────────────────────────────────────────
+// ─── :id route param 
 
 export const orderIdParamSchema = z.object({
     id: z.string().min(1, 'Order ID/Code cannot be empty.'),

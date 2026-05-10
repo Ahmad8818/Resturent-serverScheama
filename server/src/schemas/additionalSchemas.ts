@@ -11,7 +11,7 @@ import { z } from 'zod';
  * - Orders
  */
 
-// ─── UTILITIES ──────────────────────────────────────────────────────────
+// ─── UTILITIES 
 const safeJsonParse = (val: any) => {
     if (typeof val !== 'string') return val;
     try {
@@ -21,7 +21,7 @@ const safeJsonParse = (val: any) => {
     }
 };
 
-// ─── MONGODB OBJECTID VALIDATION ──────────────────────────────────────────
+// ─── MONGODB OBJECTID VALIDATION 
 /**
  * Validates MongoDB ObjectId format (24 hex characters)
  * Use for any route parameter that references a document ID
@@ -34,7 +34,7 @@ const mongoIdSchema = z
     .length(24, 'Invalid ID: Must be exactly 24 characters.')
     .regex(/^[0-9a-fA-F]{24}$/, 'Invalid menu item ID. Please clear your cart and add valid products.');
 
-// ─── CATEGORY SCHEMAS ────────────────────────────────────────────────────
+// ─── CATEGORY SCHEMAS 
 /**
  * Creating a new category
  * 
@@ -77,7 +77,7 @@ export type CreateCategoryInput = z.infer<typeof createCategorySchema>;
 export const updateCategorySchema = createCategorySchema.partial();
 export type UpdateCategoryInput = z.infer<typeof updateCategorySchema>;
 
-// ─── MENU ITEM SCHEMAS ───────────────────────────────────────────────────
+// ─── MENU ITEM SCHEMAS 
 /**
  * Creating a menu item
  * 
@@ -130,7 +130,7 @@ export type CreateMenuItemInput = z.infer<typeof createMenuItemSchema>;
 export const updateMenuItemSchema = createMenuItemSchema.partial();
 export type UpdateMenuItemInput = z.infer<typeof updateMenuItemSchema>;
 
-// ─── REVIEW SCHEMAS ─────────────────────────────────────────────────────
+// ─── REVIEW SCHEMAS 
 /**
  * Creating a review
  * 
@@ -164,7 +164,7 @@ export type CreateReviewInput = z.infer<typeof createReviewSchema>;
 export const updateReviewSchema = createReviewSchema.partial();
 export type UpdateReviewInput = z.infer<typeof updateReviewSchema>;
 
-// ─── TABLE BOOKING SCHEMAS ──────────────────────────────────────────────
+// ─── TABLE BOOKING SCHEMAS 
 /**
  * Creating a table booking
  * 
@@ -299,7 +299,7 @@ export const getTimeSlotsSchema = z.object({
 
 export type GetTimeSlotsInput = z.infer<typeof getTimeSlotsSchema>;
 
-// ─── ORDER SCHEMAS ──────────────────────────────────────────────────────
+// ─── ORDER SCHEMAS 
 /**
  * Creating an order
  * 
@@ -315,7 +315,7 @@ export type GetTimeSlotsInput = z.infer<typeof getTimeSlotsSchema>;
  *   "orderCode": "ORD-123456"
  * }
  */
-// ─── ORDER SCHEMAS ──────────────────────────────────────────────────────
+// ─── ORDER SCHEMAS 
 const normalizePaymentMethod = (method: string) => {
     const map: Record<string, string> = {
         cash_on_delivery: 'COD',
@@ -388,7 +388,7 @@ export const updateOrderStatusSchema = z.object({
 
 export type UpdateOrderStatusInput = z.infer<typeof updateOrderStatusSchema>;
 
-// ─── CHEF SCHEMAS ────────────────────────────────────────────────────────
+// ─── CHEF SCHEMAS 
 /**
  * Creating a chef
  */
@@ -409,7 +409,7 @@ export const createChefSchema = z.object({
  */
 export const updateChefSchema = createChefSchema.partial();
 
-// ─── QUERY PAGINATION SCHEMAS ───────────────────────────────────────────
+// ─── QUERY PAGINATION SCHEMAS 
 /**
  * For GET endpoints with pagination
  * 
@@ -426,7 +426,7 @@ export const paginationQuerySchema = z.object({
 
 export type PaginationQueryInput = z.infer<typeof paginationQuerySchema>;
 
-// ─── ID PARAMETER SCHEMA ────────────────────────────────────────────────
+// ─── ID PARAMETER SCHEMA 
 /**
  * For routes with :id parameter
  * 
@@ -439,7 +439,7 @@ export const idParamSchema = z.object({
 
 export type IdParamInput = z.infer<typeof idParamSchema>;
 
-// ─── FILTER SCHEMAS ────────────────────────────────────────────────────
+// ─── FILTER SCHEMAS 
 /**
  * Menu filter query
  * 

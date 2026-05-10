@@ -110,24 +110,7 @@ export const createApp = () => {
         app.use(morgan('dev'));
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // ✅ NOTE: Input validation happens PER ROUTE using Zod middleware
-    //
-    // This approach is BETTER than global xss-clean or mongo-sanitize:
-    //    1. Explicitly define what each endpoint accepts
-    //    2. Type-safe validation with TypeScript
-    //    3. Automatic trimming and transformation of inputs
-    //    4. No mutation of immutable request objects (req.query is read-only)
-    //    5. Clear, maintainable, endpoint-specific security rules
-    //    6. Prevents both XSS and NoSQL injection by validating types
-    //
-    // EXAMPLE:
-    //    router.post(
-    //        '/register',
-    //        validate(registerSchema, ValidationSource.BODY),
-    //        register
-    //    );
-    // ─────────────────────────────────────────────────────────────────────────
+
 
     // ─── Health Check ─────────────────────────────────────────────────────────
     app.get('/', (_req: Request, res: Response) => {

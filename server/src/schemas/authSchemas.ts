@@ -4,14 +4,14 @@ import { z } from 'zod';
  * Auth Validation Schemas using Zod
  *
  * These schemas provide:
- * ✅ Type-safe validation
- * ✅ XSS protection (Zod trims and sanitizes strings by default)
- * ✅ NoSQL injection prevention (explicitly validates field types)
- * ✅ Clear error messages
- * ✅ Automatic type inference for controllers
+ *  Type-safe validation
+ *  XSS protection (Zod trims and sanitizes strings by default)
+ *  NoSQL injection prevention (explicitly validates field types)
+ *  Clear error messages
+ *  Automatic type inference for controllers
  */
 
-// ─── Email Validation ──────────────────────────────────────────────────────────
+// Email Validation
 const emailSchema = z
     .string()
     .min(1, 'Email is required')
@@ -19,7 +19,7 @@ const emailSchema = z
     .toLowerCase()
     .trim();
 
-// ─── Password Validation ──────────────────────────────────────────────────────
+// ─── Password Validation
 const passwordSchema = z
     .string()
     .min(1, 'Password is required')
@@ -28,7 +28,7 @@ const passwordSchema = z
     .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
     .regex(/[0-9]/, 'Password must contain at least one number');
 
-// ─── Name Validation ───────────────────────────────────────────────────────────
+// ─── Name Validation 
 const nameSchema = z
     .string()
     .min(1, 'Name is required')
@@ -37,7 +37,7 @@ const nameSchema = z
     .trim()
     .regex(/^[a-zA-Z\s'-]+$/, 'Name can only contain letters, spaces, hyphens, and apostrophes');
 
-// ─── Register Schema ──────────────────────────────────────────────────────────
+// ─── Register Schema 
 /**
  * Validates user registration request body
  *
@@ -52,7 +52,7 @@ export const registerSchema = z.object({
 
 export type RegisterInput = z.infer<typeof registerSchema>;
 
-// ─── Login Schema ─────────────────────────────────────────────────────────────
+// ─── Login Schema 
 /**
  * Validates user login request body
  * Note: Password is intentionally not validated against complex rules here
@@ -67,7 +67,7 @@ export const loginSchema = z.object({
 
 export type LoginInput = z.infer<typeof loginSchema>;
 
-// ─── Email Verification Schema ────────────────────────────────────────────────
+// ─── Email Verification Schema 
 /**
  * Validates email verification request
  */
@@ -81,7 +81,7 @@ export const verifyEmailSchema = z.object({
 
 export type VerifyEmailInput = z.infer<typeof verifyEmailSchema>;
 
-// ─── Forgot Password Schema ───────────────────────────────────────────────────
+// ─── Forgot Password Schema 
 /**
  * Validates forgot password request
  */
@@ -91,7 +91,7 @@ export const forgotPasswordSchema = z.object({
 
 export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
 
-// ─── Reset Password Schema ───────────────────────────────────────────────────
+// ─── Reset Password Schema 
 /**
  * Validates password reset request
  */
@@ -106,7 +106,7 @@ export const resetPasswordSchema = z.object({
 
 export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
 
-// ─── Update Profile Schema ───────────────────────────────────────────────────
+// ─── Update Profile Schema 
 /**
  * Validates profile update request
  */
@@ -123,7 +123,7 @@ export const updateProfileSchema = z.object({
 
 export type UpdateProfileInput = z.infer<typeof updateProfileSchema>;
 
-// ─── Query Pagination Schema ─────────────────────────────────────────────────
+// ─── Query Pagination Schema 
 /**
  * Validates common pagination query parameters
  * @example
@@ -155,7 +155,7 @@ export const paginationSchema = z.object({
 
 export type PaginationInput = z.infer<typeof paginationSchema>;
 
-// ─── Params ID Schema ─────────────────────────────────────────────────────────
+// ─── Params ID Schema
 /**
  * Validates MongoDB ObjectId in URL parameters
  * @example
