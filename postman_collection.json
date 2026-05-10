@@ -1,0 +1,72 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
+    "name": "Restaurant Backend Validation API",
+    "description": "Postman collection demonstrating deep nested JSON Schema validation via Zod in Node.js.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Validate Complex Order Schema",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"items\": [\n    {\n      \"menuItemId\": \"507f1f77bcf86cd799439011\",\n      \"quantity\": 2,\n      \"spiceLevel\": \"medium\"\n    }\n  ],\n  \"orderType\": \"online\",\n  \"deliveryAddress\": {\n    \"street\": \"123 Main St\",\n    \"city\": \"Metropolis\",\n    \"zipCode\": \"10001\"\n  },\n  \"paymentMethod\": \"STRIPE\",\n  \"orderCode\": \"ORD-12345\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/orders",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "orders"
+          ]
+        },
+        "description": "Validates a 4-level deep JSON object checking item arrays, hex ObjectIDs, enums (STRIPE, COD), and optional nested delivery fields."
+      },
+      "response": []
+    },
+    {
+      "name": "Validation Failure Example (Invalid ID / Missing Fields)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"items\": [\n    {\n      \"menuItemId\": \"invalid-id-format\",\n      \"quantity\": -1\n    }\n  ],\n  \"paymentMethod\": \"UNKNOWN\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/orders",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "orders"
+          ]
+        },
+        "description": "Demonstrates strict validation errors for invalid MongoDB ObjectIDs, negative quantities, and unknown enums."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://restaurant-backend-api.vercel.app"
+    }
+  ]
+}
